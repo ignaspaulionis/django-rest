@@ -1,1 +1,1 @@
-# django-rest
+# django-rest-test
