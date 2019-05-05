@@ -7,6 +7,7 @@ from rest_framework import status
 
 
 CREATE_USER_URL = reverse('user:create')
+TOKEN_URL = reverse('user:token')
 
 
 def create_user(**params):
@@ -59,3 +60,52 @@ class PublicUserApiTests(TestCase):
             email=payload['email']
         ).exists()
         self.assertFalse(users_exists)
+
+    def test_create_token_for_user(self):
+        """Test tht toekn is created for user"""
+        payload = {
+            'email': 'test@ignas.lt',
+            'password': 'testpass123',
+            'name': 'Test name'
+        }
+        create_user(**payload)
+        res = self.client.post(TOKEN_URL, payload)
+
+        self.assertIn('token', res.data)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+    def test_create_token_invalid_credentials(self):
+        """Test that invalid credentials do not supply token"""
+        payload = {
+            'email': 'test@ignas.lt',
+            'password': 'testpass123',
+            'name': 'Test name'
+        }
+        res = self.client.post(TOKEN_URL, payload)
+
+        self.assertNotIn('token', res.data)
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_that_token_is_not_created_if_user_does_not_exist(self):
+        """Test that token is not given for the non existing user"""
+        payload = {
+            'email': 'test@ignas.lt',
+            'password': 'testpass123',
+            'name': 'Test name'
+        }
+        res = self.client.post(TOKEN_URL, payload)
+
+        self.assertNotIn('token', res.data)
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_that_token_is_not_created_if_user_is_not_supplied(self):
+        """Test that email and password are required"""
+        payload = {
+            'email': '',
+            'password': '',
+            'name': 'Test name'
+        }
+        res = self.client.post(TOKEN_URL, payload)
+
+        self.assertNotIn('token', res.data)
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
