@@ -33,3 +33,21 @@ L
 app/recipe/tests/__init__.py,4/a/4a0254a67d61bf2508ed8c63ca30f7728dd7fe14
 @
 app/user/urls.py,6/e/6e915112bd2fef7175d2193755672339a9c8529f
+F
+app/recipe/__init__.py,6/1/6184cfba9335ee3225e356944d93fd4e7413322f
+B
+app/recipe/apps.py,2/4/24b879552f2788ae42a75bc3ee462b5c61ef2c1a
+C
+app/recipe/views.py,1/3/13187778ece7081acd60bf56bbff4f19683ced0b
+B
+app/recipe/urls.py,2/6/26034ad29758bb07ea265dc733fc263345825361
+I
+app/recipe/serializers.py,0/e/0e40728157a57fc90aa033876ac4a30b0ae06004
+Q
+!app/recipe/tests/test_tags_api.py,5/7/575449ac454f9131f5ed3ca1cffb1a3e4f6e7179
+D
+app/core/__init__.py,a/3/a3fe4ad76591e830f11671ae24cd80338af95756
+X
+(app/recipe/tests/test_ingredients_api.py,c/1/c1310179df018fb606c4ee4039436fb001459ee7
+S
+#app/recipe/tests/test_recipe_api.py,3/4/3432a5c66bb0d4e1a4781bb225eb20b781150a20

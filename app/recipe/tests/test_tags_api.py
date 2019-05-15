@@ -5,7 +5,7 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from core.models import Tag
+from core.models import Tag, Ingredient
 
 from recipe.serializers import TagSerializer
 
@@ -82,3 +82,13 @@ class PrivateTagsApiTests(TestCase):
         res = self.client.post(TAGS_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_ingredient_string(self):
+        """Test the ingredient string representation"""
+
+        ingredient = Ingredient.objects.create(
+            user=self.user,
+            name='Cucumber'
+        )
+
+        self.assertEqual(str(ingredient), ingredient.name)
